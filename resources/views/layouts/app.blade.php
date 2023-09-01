@@ -21,7 +21,15 @@
 
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js', 'resources/js/tableaux/clientsTable.js', 'resources/js/tableaux/usersTable.js', 'resources/js/tableaux/equipesTable.js', 'resources/js/tableaux/HistoriqueTable.js'])
+    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+    <script src="{{ asset('resources/js/app.js') }}"></script>
+    <script src="{{ asset('resources/js/main.js') }}"></script>
+    <script src="{{ asset('resources/js/tableaux/clientsTable.js') }}"></script>
+    <script src="{{ asset('resources/js/tableaux/usersTable.js') }}"></script>
+    <script src="{{ asset('resources/js/tableaux/equipesTable.js') }}"></script>
+    <script src="{{ asset('resources/js/tableaux/HistoriqueTable.js') }}"></script>
+
+    <!-- @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js', 'resources/js/tableaux/clientsTable.js', 'resources/js/tableaux/usersTable.js', 'resources/js/tableaux/equipesTable.js', 'resources/js/tableaux/HistoriqueTable.js']) -->
 
 </head>
 
