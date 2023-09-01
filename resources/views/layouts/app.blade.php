@@ -21,13 +21,14 @@
 
 
     <!-- Scripts -->
-    <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
-    <script src="{{ asset('resources/js/app.js') }}"></script>
-    <script src="{{ asset('resources/js/main.js') }}"></script>
-    <script src="{{ asset('resources/js/tableaux/clientsTable.js') }}"></script>
-    <script src="{{ asset('resources/js/tableaux/usersTable.js') }}"></script>
-    <script src="{{ asset('resources/js/tableaux/equipesTable.js') }}"></script>
-    <script src="{{ asset('resources/js/tableaux/HistoriqueTable.js') }}"></script>
+    {{-- <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}"> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{{ asset('app.js') }}"></script>
+    <script src="{{ asset('main.js') }}"></script>
+    <script src="{{ asset('tableaux/clientsTable.js') }}"></script>
+    <script src="{{ asset('tableaux/usersTable.js') }}"></script>
+    <script src="{{ asset('tableaux/equipesTable.js') }}"></script>
+    <script src="{{ asset('tableaux/HistoriqueTable.js') }}"></script>
 
     <!-- @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js', 'resources/js/tableaux/clientsTable.js', 'resources/js/tableaux/usersTable.js', 'resources/js/tableaux/equipesTable.js', 'resources/js/tableaux/HistoriqueTable.js']) -->
 
@@ -53,7 +54,6 @@
     </div>
 
     @notifyJs
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.js"></script>
 </body>

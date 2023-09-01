@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "datatables.net-dt": "^1.13.6",
-        "flowbite": "^1.8.1"
+        "flowbite": "^1.8.1",
+        "jquery": "^3.7.1"
     }
 }
