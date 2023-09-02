@@ -2,6 +2,7 @@ $(document).ready(function () {
     $("#historiqueTable").DataTable({
         language: {
             "info": "Affichage de _TOTAL_ résultats",
+            "emptyTable": "Aucune transaction n'a été faite",
             "infoFiltered": "(filtré sur un total de _MAX_ résultats au total)",
             "loadingRecords": "Chargement en cours... Veuillez patienter.",
             "search": "Rechercher :",

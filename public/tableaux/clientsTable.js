@@ -2,6 +2,7 @@ $(document).ready(function () {
     $("#clientTable").DataTable({
         language: {
             "info": "Affichage de _TOTAL_ résultats",
+            "emptyTable": "Vous n'avez pas encore de clients",
             "infoFiltered": "(filtré sur un total de _MAX_ résultats au total)",
             "loadingRecords": "Chargement en cours... Veuillez patienter.",
             "search": "Rechercher :",

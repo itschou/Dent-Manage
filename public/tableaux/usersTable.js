@@ -3,6 +3,7 @@ $(document).ready(function () {
         language: {
             "info": "Affichage de _TOTAL_ résultats",
             "infoFiltered": "(filtré sur un total de _MAX_ résultats au total)",
+            "emptyTable": "Vous n'avez pas encore de collaborateurs",
             "loadingRecords": "Chargement en cours... Veuillez patienter.",
             "search": "Rechercher :",
             "paginate": {

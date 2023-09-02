@@ -16,7 +16,7 @@ class ClientController extends Controller
         $this->middleware('auth');
     }
 
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -37,7 +37,9 @@ class ClientController extends Controller
     public function getData()
     {
 
-        $clients = Client::orderByRaw("
+        if (auth()->user()->role === "Admin") {
+
+            $clients = Client::orderByRaw("
         CASE
             WHEN status = 'En période de teste' THEN 1
             WHEN status = 'En attente de paiement' THEN 2
@@ -45,6 +47,19 @@ class ClientController extends Controller
             ELSE 4
         END
     ")->get();
+        } else {
+
+            $clients = Client::where('equipe_id', '=', auth()->user()->equipe_id)->orderByRaw("
+        CASE
+            WHEN status = 'En période de teste' THEN 1
+            WHEN status = 'En attente de paiement' THEN 2
+            WHEN status = 'Non Payé' THEN 3
+            ELSE 4
+        END
+    ")->get();
+        }
+
+
         foreach ($clients as $client) {
             $client->statusClass  = $this->getStatusClass($client->status);
             $client->date  = $client->updated_at->format('Y-m-d h:i');

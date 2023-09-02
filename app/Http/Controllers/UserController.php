@@ -95,7 +95,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-
         $equipes = Equipe::all();
         $currentEquipe = User::find($user->id)->equipe->id;
         return view('users.modifier', compact('user', 'equipes', 'currentEquipe'));

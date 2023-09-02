@@ -103,6 +103,19 @@ $userCount = App\Models\Client::count();
                 </a>
             </li>
             @endif
+            <li>
+                <form action="{{ route('user.profileShow') }}" method="POST">
+                    @csrf
+
+                    <button class="block px-4 py-2 w-100 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Mon compte</button>
+                </form>
+            </li>
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white">Déconnexion</button>
+                </form>
+            </li>
         </ul>
 
 
