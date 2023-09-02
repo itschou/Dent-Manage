@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('equipe_id')->constrained('equipes');
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('client_id')->constrained('clients');
+            $table->string('status');
+            $table->string('prix');
             $table->timestamps();
         });
     }

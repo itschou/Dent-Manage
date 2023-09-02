@@ -69,7 +69,7 @@ $pdgTelephone = User::where('nom', 'Afiri')->first();
         <p class="mt-6 text-sm text-gray-500 text-center">Veuillez noter que ce mail est à titre informatif uniquement et qu'il n'est pas nécessaire d'y répondre.</p>
         <p class="mt-4">Cordialement,</p>
         <p class="font-semibold">{{ Auth::user()->nom }} {{ Auth::user()->prenom }}</p>
-        <p class="font-semibold">Contact : {{ $pdgTelephone->telephone }}</p>
+        <p class="font-semibold">Si vous avez une quéstion ou une demande voici notre numéro de support : {{ $pdgTelephone->telephone }}</p>
     </div>
 
 </body>

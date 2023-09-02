@@ -24,10 +24,14 @@ class HistoriqueFactory extends Factory
         $equipeId = Equipe::inRandomOrder()->first()->id ?? Equipe::factory()->create()->id;
         $userID = User::inRandomOrder()->first()->id ?? User::factory()->create()->id;
         $clientID = Client::inRandomOrder()->first()->id ?? Client::factory()->create()->id;
+        $status = Client::inRandomOrder()->first()->status ?? Client::factory()->create()->status;
+        $prix = Client::inRandomOrder()->first()->prix ?? Client::factory()->create()->prix;
         return [
             'equipe_id' => $equipeId,
             'user_id' => $userID,
             'client_id' => $clientID,
+            'status' => $status,
+            'prix' => $prix,
         ];
     }
 }

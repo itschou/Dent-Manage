@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\FactureMail;
 use App\Models\Client;
+use App\Models\Historique;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -137,6 +138,13 @@ class ClientController extends Controller
             } else {
                 $client->update($request->all());
                 Mail::to($client->email)->send(new FactureMail($client));
+                Historique::create([
+                    'equipe_id' => auth()->user()->equipe_id,
+                    'user_id' => auth()->user()->id,
+                    'client_id' => $client->id,
+                    'status' => $client->status,
+                    'prix' => $client->prix,
+                ]);
                 notify()->success('Vous avez envoyé une facture à ' . $client->email . ' avec succès !', 'Bravo !');
             }
         } catch (Exception $e) {

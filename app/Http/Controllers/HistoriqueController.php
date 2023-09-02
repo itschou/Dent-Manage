@@ -20,12 +20,14 @@ class HistoriqueController extends Controller
 
     public function getData()
     {
-        $historiques = Historique::all();
+        $historiques = Historique::orderByDesc('id')->get();
 
         foreach ($historiques as $historique) {
             $historique->equipe  = Equipe::find($historique->equipe_id)->nom;
             $historique->collaborateur  = User::find($historique->user_id)->nom ." " . User::find($historique->user_id)->prenom;
             $historique->clients  = Client::find($historique->client_id)->nom;
+            $historique->prix  = $historique->prix;
+            $historique->status  = $historique->status;
             $historique->date  = $historique->created_at->format('d-m-Y');
         }
 

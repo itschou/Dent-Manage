@@ -59,11 +59,11 @@ function CalculatePourcentage() {
                 // Utilise la somme ici, par exemple :
                 $("#argentPourcentageBrut").text((((50 / 100) * argentTotal) - somme).toLocaleString() + " DH");
                 $("#Totalhebergement").text(somme.toLocaleString() + " DH");
+                $("#argentPourcentage").text(((50 / 100) * argentTotal) + " DH");
+                $("#TableauTotalPourcentage").text("Total avec 50%");
             },
         });
     }
-    $("#argentPourcentage").text(((50 / 100) * argentTotal).toLocaleString() + " DH").toLocaleString();
-    $("#TableauTotalPourcentage").text("Total avec 50%");
 }
 
 
@@ -79,6 +79,8 @@ function checkSelectedValue() {
         inputAmount.prop("disabled", false);
     }
 }
+
+// Calcule Simulation 
 
 function CalculateAmout() {
     var prixMensuel = parseFloat($("#prixClientShow").val());

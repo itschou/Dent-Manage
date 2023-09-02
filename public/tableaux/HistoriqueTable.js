@@ -26,6 +26,8 @@ $(document).ready(function () {
             { data: "equipe" },
             { data: "collaborateur" },
             { data: "clients" },
+            { data: "prix" },
+            { data: "status" },
             
         ],
     });
