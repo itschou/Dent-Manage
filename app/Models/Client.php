@@ -17,7 +17,8 @@ class Client extends Model
         'status',
         'prix',
         'abonnement',
-        'equipe'
+        'equipe',
+        'equipe_id'
     ];
 
     public function equipe()

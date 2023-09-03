@@ -13,6 +13,12 @@ class HistoriqueController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'statusCheck']);
+    }
+
     public function index()
     {
         return view('historique.index');
@@ -24,7 +30,7 @@ class HistoriqueController extends Controller
 
         foreach ($historiques as $historique) {
             $historique->equipe  = Equipe::find($historique->equipe_id)->nom;
-            $historique->collaborateur  = User::find($historique->user_id)->nom ." " . User::find($historique->user_id)->prenom;
+            $historique->collaborateur  = User::find($historique->user_id)->nom . " " . User::find($historique->user_id)->prenom;
             $historique->clients  = Client::find($historique->client_id)->nom;
             $historique->prix  = $historique->prix;
             $historique->status  = $historique->status;
@@ -32,7 +38,6 @@ class HistoriqueController extends Controller
         }
 
         return response()->json($historiques);
-        
     }
 
     /**

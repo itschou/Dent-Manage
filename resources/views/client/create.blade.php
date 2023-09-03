@@ -10,23 +10,23 @@
             @csrf
             <div>
                 <label for="nom" class="block font-medium">Nom :</label>
-                <input type="text" id="nom" name="nom" class="w-full border rounded p-2">
+                <input type="text" id="nom" name="nom" class="w-full border rounded p-2" required>
             </div>
             <div>
                 <label for="adresse" class="block font-medium">Adresse :</label>
-                <input type="text" id="adresse" name="adresse" class="w-full border rounded p-2">
+                <input type="text" id="adresse" name="adresse" class="w-full border rounded p-2" required>
             </div>
             <div>
                 <label for="telephone" class="block font-medium">Téléphone :</label>
-                <input type="text" id="telephone" name="telephone" class="w-full border rounded p-2">
+                <input type="text" id="telephone" name="telephone" class="w-full border rounded p-2" required>
             </div>
             <div>
                 <label for="email" class="block font-medium">Email :</label>
-                <input type="email" id="email" name="email" class="w-full border rounded p-2">
+                <input type="email" id="email" name="email" class="w-full border rounded p-2" required>
             </div>
             <div>
                 <label for="status" class="block font-medium">Statut :</label>
-                <select id="statusClientCreate" name="status" class="w-full border rounded p-2">
+                <select id="statusClientCreate" name="status" class="w-full border rounded p-2" required>
                     <option value="En période de teste">En période de teste</option>
                     <option value="En attente de paiement">En attente de paiement</option>
                     <option value="Non Payé">Non Payé</option>
@@ -34,7 +34,7 @@
             </div>
             <div>
                 <label for="abonnement" class="block font-medium">Abonnement :</label>
-                <select id="abonnement" name="abonnement" class="w-full border rounded p-2">
+                <select id="abonnement" name="abonnement" class="w-full border rounded p-2" required>
                     <option value="Mensuel">Mensuel</option>
                     <option value="Trimestriel">Trimestriel</option>
                     <option value="Semestriel">Semestriel</option>
@@ -43,7 +43,7 @@
             </div>
             <div>
                 <label for="prix" class="block font-medium">Prix :</label>
-                <input type="text" id="prixClientCreate" class="w-full border rounded p-2">
+                <input type="number" id="prixClientCreate" class="w-full border rounded p-2" min="400" required>
                 <input type="hidden" id="prixHidden" name="prix">
             </div>
 
@@ -58,7 +58,7 @@
     <div class=" mx-auto p-6">
         <div>
             <label for="prix" class="block font-medium">Simulation de prix</label>
-            <input type="number" id="prixClientShow" class="w-full border rounded p-2">
+            <input type="number" id="prixClientShow" class="w-full border rounded p-2" required>
         </div><br>
         <table class="w-full border rounded-lg overflow-hidden">
             <thead>

@@ -14,27 +14,27 @@
 
             <div>
                 <label for="nom" class="block font-medium">Nom</label>
-                <input type="text" name="nom" id="nom" value="{{ $client->nom }}" class="w-full border rounded p-2">
+                <input type="text" name="nom" id="nom" value="{{ $client->nom }}" class="w-full border rounded p-2" required>
             </div>
 
             <div>
                 <label for="adresse" class="block font-medium">Adresse</label>
-                <input type="text" name="adresse" id="adresse" value="{{ $client->adresse }}" class="w-full border rounded p-2">
+                <input type="text" name="adresse" id="adresse" value="{{ $client->adresse }}" class="w-full border rounded p-2" required>
             </div>
 
             <div>
                 <label for="telephone" class="block font-medium">Téléphone</label>
-                <input type="tel" name="telephone" id="telephone" value="{{ $client->telephone }}" class="w-full border rounded p-2">
+                <input type="tel" name="telephone" id="telephone" value="{{ $client->telephone }}" class="w-full border rounded p-2" required>
             </div>
 
             <div>
                 <label for="email" class="block font-medium">Email</label>
-                <input type="email" name="email" id="email" value="{{ $client->email }}" class="w-full border rounded p-2">
+                <input type="email" name="email" id="email" value="{{ $client->email }}" class="w-full border rounded p-2" required>
             </div>
 
             <div>
                 <label for="status" class="block font-medium">Status</label>
-                <select name="status" id="statusClientCreate" class="w-full border rounded p-2">
+                <select name="status" id="statusClientCreate" class="w-full border rounded p-2" required>
                     <option value="Payé" class="text-green-500" {{ $client->status === 'Payé' ? 'selected' : '' }}>Payé</option>
                     <option value="En attente de paiement" class="text-orange-500" {{ $client->status === 'En attente de paiement' ? 'selected' : '' }}>En attente de paiement</option>
                     <option value="Non Payé" class="text-red-500" {{ $client->status === 'Non Payé' ? 'selected' : '' }}>Non Payé</option>
@@ -45,13 +45,13 @@
 
             <div>
                 <label for="prix" class="block font-medium">Prix</label>
-                <input type="number" id="prixClientCreate" value="{{ $client->prix }}" class="w-full border rounded p-2">
+                <input type="number" id="prixClientCreate" value="{{ $client->prix }}" class="w-full border rounded p-2" min="400" required>
                 <input type="hidden" id="prixHidden" name="prix">
             </div>
 
             <div>
                 <label for="abonnement" class="block font-medium">Abonnement</label>
-                <select name="abonnement" id="abonnement" class="w-full border rounded p-2">
+                <select name="abonnement" id="abonnement" class="w-full border rounded p-2" required>
                     <option value="Mensuel" {{ $client->abonnement === 'Mensuel' ? 'selected' : '' }}>Mensuel</option>
                     <option value="Trimestriel" {{ $client->abonnement === 'Trimestriel' ? 'selected' : '' }}>Trimestriel</option>
                     <option value="Semestriel" {{ $client->abonnement === 'Semestriel' ? 'selected' : '' }}>Semestriel</option>
@@ -81,7 +81,7 @@
     <div class=" mx-auto p-6">
         <div>
             <label for="prix" class="block font-medium">Simulation de prix</label>
-            <input type="number" id="prixClientShow" class="w-full border rounded p-2">
+            <input type="number" id="prixClientShow" class="w-full border rounded p-2" required>
         </div><br>
         <table class="w-full border rounded-lg overflow-hidden">
             <thead>

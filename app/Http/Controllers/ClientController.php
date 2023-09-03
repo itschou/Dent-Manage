@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\FactureMail;
 use App\Models\Client;
+use App\Models\Hebergement;
 use App\Models\Historique;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -48,6 +49,7 @@ class ClientController extends Controller
             ELSE 4
         END
     ")->get();
+
         } else {
 
             $clients = Client::where('equipe_id', '=', auth()->user()->equipe_id)->orderByRaw("
@@ -65,6 +67,10 @@ class ClientController extends Controller
             $client->statusClass  = $this->getStatusClass($client->status);
             $client->date  = $client->updated_at->format('Y-m-d h:i');
             $client->equipe  = Client::find($client->id)->equipe->nom;
+            $client->prixMensuelFix  = Hebergement::first()->prixMensuel;
+            $client->prixTrimestrielFix  = Hebergement::first()->prixTrimestriel;
+            $client->prixSemestrielFix  = Hebergement::first()->prixSemestriel;
+            $client->prixAnnuelFix  = Hebergement::first()->prixAnnuel;
         }
 
         return response()->json($clients);
@@ -97,10 +103,19 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Client $client)
+    public function store(Request $request)
     {
+        Client::create([
+            'equipe_id' => auth()->user()->equipe_id,
+            'nom' => $request->nom,
+            'adresse' => $request->adresse,
+            'telephone' => $request->telephone,
+            'email' => $request->email,
+            'status' => $request->status,
+            'abonnement' => $request->abonnement,
+            'prix' => $request->prix,
 
-        $client->create($request->all());
+        ]);
 
 
         emotify('success', 'Vous venez de créer un client !');
@@ -147,7 +162,7 @@ class ClientController extends Controller
                 ]);
                 notify()->success('Vous avez envoyé une facture à ' . $client->email . ' avec succès !', 'Bravo !');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e)  {
             notify()->preset('modif-erreur');
         }
         return to_route('client.index');
@@ -164,7 +179,7 @@ class ClientController extends Controller
 
             $client->delete();
             notify()->success('Vous avez supprimé ' . $client->nom . ' avec succès !', 'Bravo !');
-        } catch (Exception $e) {
+        } catch (\Exception $e)  {
             notify()->preset('delete-erreur');
         }
         return to_route('client.index');

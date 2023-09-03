@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EquipeController;
+use App\Http\Controllers\HebergementController;
 use App\Http\Controllers\HistoriqueController;
 use App\Http\Controllers\InformationsController;
 use App\Http\Controllers\RevenuController;
@@ -51,4 +52,7 @@ Route::resource('historique', HistoriqueController::class);
 Route::get('/historiques/getData', [HistoriqueController::class, 'getData']);
 
 Route::get('information', InformationsController::class)->name('information.index');
+
+
+Route::resource('hebergement', HebergementController::class);
 

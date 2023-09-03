@@ -35,24 +35,27 @@ function CalculatePourcentage() {
             method: "GET",
             success: function (data) {
                 // Initialisation des variables pour chaque type d'abonnement
-                var abonnement = {"Mensuel": 1, "Trimestriel": 1, "Semestriel": 1, "Annuel": 600};
+                console.log(data);
     
                 // Parcours les données de la base de données
                 for (var i = 0; i < data.length; i++) {
                     var client = data[i];
+
+
+
     
                     // Vérifie le type d'abonnement de ce client et ajoute la somme correspondante
                     if (client.abonnement === "Mensuel") {
-                        somme += abonnement.Mensuel;
+                        somme += client.prixMensuelFix;
                     }
                     if (client.abonnement === "Trimestriel") {
-                        somme += abonnement.Trimestriel;
+                        somme += client.prixTrimestrielFix;
                     }
                     if (client.abonnement === "Semestriel") {
-                        somme += abonnement.Semestriel;
+                        somme += client.prixSemestrielFix;
                     }
                     if (client.abonnement === "Annuel") {
-                        somme += abonnement.Annuel;
+                        somme += client.prixAnnuelFix;
                     }
                 }
     
@@ -72,7 +75,7 @@ function checkSelectedValue() {
     var inputAmount = $("#prixClientCreate");
 
     if (selectedValue === "En période de teste") {
-        inputAmount.val("200");
+        inputAmount.val("400");
         inputAmount.prop("disabled", true);
     } else {
         inputAmount.val("");
@@ -86,20 +89,20 @@ function CalculateAmout() {
     var prixMensuel = parseFloat($("#prixClientShow").val());
 
     // Prix normal
-    var prixTrimestrielNormal = prixMensuel * 3;
-    var prixSemestrielNormal = prixMensuel * 6;
-    var prixAnnuelNormal = prixMensuel * 12;
+    var prixTrimestrielNormal = (prixMensuel * 3) + 200;
+    var prixSemestrielNormal = (prixMensuel * 6) + 200;
+    var prixAnnuelNormal = (prixMensuel * 12) + 200;
 
     $("#prixMensuel").text(prixMensuel.toFixed(2) + " DH");
-    $("#prixTrimestriel").text(prixTrimestrielNormal.toFixed(2) + " DH");
-    $("#prixSemestriel").text(prixSemestrielNormal.toFixed(2) + " DH ");
-    $("#prixAnnuel").text(prixAnnuelNormal.toFixed(2) + " DH ");
+    $("#prixTrimestriel").text((prixTrimestrielNormal.toFixed(2)) + " DH");
+    $("#prixSemestriel").text((prixSemestrielNormal.toFixed(2)) + " DH ");
+    $("#prixAnnuel").text((prixAnnuelNormal.toFixed(2)) + " DH ");
 
     // Prix après réduction
 
-    var prixTrimestriel = prixTrimestrielNormal * 0.9;
-    var prixSemestriel = prixSemestrielNormal * 0.8;
-    var prixAnnuel = prixAnnuelNormal * 0.7;
+    var prixTrimestriel = (prixTrimestrielNormal * 0.9);
+    var prixSemestriel = (prixSemestrielNormal * 0.8 );
+    var prixAnnuel = (prixAnnuelNormal * 0.7 );
 
     $("#prixMensuelReduc").text(prixMensuel.toFixed(2) + " DH");
     $("#prixTrimestrielReduc").text(prixTrimestriel.toFixed(2) + " DH");
