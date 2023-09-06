@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('prix');
             $table->string('abonnement');
             $table->string('status');
+            $table->string('paiement');
             $table->timestamps();
         });
     }

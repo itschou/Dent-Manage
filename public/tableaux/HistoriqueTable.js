@@ -26,7 +26,15 @@ $(document).ready(function () {
             { data: "equipe" },
             { data: "collaborateur" },
             { data: "clients" },
-            { data: "prix" },
+            { data: "prix",
+            render: function (data, type, row) {
+                return (
+                    '<div class="flex flex-col items-center">' +
+                        row.prix + " DH"
+                    + "</div>"
+                );
+            }, },
+            { data: "paiement" },
             { data: "status" },
             
         ],

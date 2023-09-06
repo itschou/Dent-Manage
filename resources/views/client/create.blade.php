@@ -47,6 +47,14 @@
                 <input type="hidden" id="prixHidden" name="prix">
             </div>
 
+            <div>
+                <label for="paiement" class="block font-medium">Paiement :</label>
+                <select id="paiement" name="paiement" class="w-full border rounded p-2" required>
+                    <option value="Virement">Virement</option>
+                    <option value="Espèces">Espèces</option>
+                </select>
+            </div>
+
 
 
 

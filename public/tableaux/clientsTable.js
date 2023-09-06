@@ -1,14 +1,14 @@
 $(document).ready(function () {
     $("#clientTable").DataTable({
         language: {
-            "info": "Affichage de _TOTAL_ résultats",
-            "emptyTable": "Vous n'avez pas encore de clients",
-            "infoFiltered": "(filtré sur un total de _MAX_ résultats au total)",
-            "loadingRecords": "Chargement en cours... Veuillez patienter.",
-            "search": "Rechercher :",
-            "paginate": {
-                "next": "Suivant",
-                "previous": "Précédent",
+            info: "Affichage de _TOTAL_ résultats",
+            emptyTable: "Vous n'avez pas encore de clients",
+            infoFiltered: "(filtré sur un total de _MAX_ résultats au total)",
+            loadingRecords: "Chargement en cours... Veuillez patienter.",
+            search: "Rechercher :",
+            paginate: {
+                next: "Suivant",
+                previous: "Précédent",
             },
         },
         paging: true,
@@ -25,20 +25,20 @@ $(document).ready(function () {
             { data: "adresse" },
             { data: "telephone" },
             { data: "abonnement" },
-            { data: "prix",
-            render: function (data) {
-                return (
-                    data + " DH "
-                );
+            {
+                data: "prix",
+                render: function (data) {
+                    return data + " DH ";
+                },
             },
-         },
+            { data: "paiement" },
             {
                 data: "status",
                 render: function (data, type, row) {
                     return (
                         '<div class="flex flex-col items-center">' +
                         '<span class="inline-flex px-2 text-xs font-semibold rounded-full ' +
-                        row.statusClass  +
+                        row.statusClass +
                         '">' +
                         data +
                         "</span>" +
@@ -48,14 +48,18 @@ $(document).ready(function () {
                     );
                 },
             },
+
             { data: "equipe" },
             {
                 data: null,
-                render: function(data, type, row) {
-                    return '<a href="/client/' + row.id + '/edit" class="text-blue-500 hover:underline">Modifier</a>';
-                }
+                render: function (data, type, row) {
+                    return (
+                        '<a href="/client/' +
+                        row.id +
+                        '/edit" class="text-blue-500 hover:underline">Modifier</a>'
+                    );
+                },
             },
-            
         ],
     });
 
@@ -65,11 +69,7 @@ $(document).ready(function () {
             url: "/clients/getData", // URL vers la méthode getData dans ClientController
             method: "GET",
             success: function (data) {
-                $("#clientTable")
-                    .DataTable()
-                    .clear()
-                    .rows.add(data)
-                    .draw();
+                $("#clientTable").DataTable().clear().rows.add(data).draw();
             },
         });
     }

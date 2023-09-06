@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'telephone' => fake()->phoneNumber(),
             'cin' => Str::random(3),
             'role' => 'Collaborateur',
-            'status' => 'En période de teste',
+            'status' => 'En examen',
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

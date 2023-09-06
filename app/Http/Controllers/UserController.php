@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUserMail;
 use App\Models\Equipe;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -76,6 +78,9 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt('123456789')
         ]);
+
+        Mail::to($request->email)->send(new NewUserMail($request->nom, $request->prenom, $request->email, $request->status));
+
 
         notify()->success('Votre nouveau collaborateur a été créer avec succèss ', 'Bravo !');
 

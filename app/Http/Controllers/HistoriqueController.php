@@ -34,6 +34,7 @@ class HistoriqueController extends Controller
             $historique->clients  = Client::find($historique->client_id)->nom;
             $historique->prix  = $historique->prix;
             $historique->status  = $historique->status;
+            $historique->paiement  = Client::find($historique->client_id)->paiement;
             $historique->date  = $historique->created_at->format('d-m-Y');
         }
 

@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
         \App\Models\Historique::factory(25)->create();
 
         \App\Models\Hebergement::factory()->create([
-            'prixMensuel' => 0,
-            'prixTrimestriel' => 0,
-            'prixSemestriel' => 0,
-            'prixAnnuel' => 0,
+            'prixMensuel' => 400,
+            'prixTrimestriel' => 1260,
+            'prixSemestriel' => 2080,
+            'prixAnnuel' => 3500,
 
         ]);
 

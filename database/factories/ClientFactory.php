@@ -20,7 +20,8 @@ class ClientFactory extends Factory
     {
 
         $abonnement = ['Mensuel', 'Trimestriel', 'Semestriel', 'Annuel'];
-        $paiement = ['Payé', 'En attente de paiement', 'Non Payé', 'En période de teste'];
+        $paiement = ['Virement', 'Espèces'];
+        $status = ['Payé', 'En attente de paiement', 'Non Payé', 'En période de teste'];
         $equipeId = Equipe::inRandomOrder()->first()->id ?? Equipe::factory()->create()->id;
 
         return [
@@ -30,8 +31,21 @@ class ClientFactory extends Factory
             'email' => fake()->freeEmail(),
             'telephone' => fake()->phoneNumber(),
             'prix' => fake()->numberBetween(300, 6000),
-            'abonnement' => fake()->randomElement($abonnement),
-            'status' => fake()->randomElement($paiement)
+            'abonnement' => function () {
+                $randomNumber = fake()->numberBetween(1, 100);
+            
+                if ($randomNumber <= 60) {
+                    return 'Mensuel'; // 40% d'annuel
+                } elseif ($randomNumber <= 20) {
+                    return 'Trimestriel'; // 30% de trimestriel
+                } elseif ($randomNumber <= 10) {
+                    return 'Annuel'; // 30% de trimestriel
+                } else {
+                    return 'Semestriel'; // 30% de semestriel
+                }
+            },
+            'status' => fake()->randomElement($status),
+            'paiement' => fake()->randomElement($paiement)
         ];
     }
 }

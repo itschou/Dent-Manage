@@ -9,21 +9,24 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class FactureMail extends Mailable
+class NewUserMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
+    public $nom;
+    public $prenom;
+    public $email;
+    public $status;
 
-    public $client;
-    public $titre;
-
-    public function __construct($client, $titre)
+    public function __construct($nom, $prenom, $email, $status)
     {
-        $this->client = $client;
-        $this->titre = $titre;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->email = $email;
+        $this->status = $status;
     }
 
     /**
@@ -32,7 +35,7 @@ class FactureMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->titre,
+            subject: 'DentAssist-Géstion - Identifiants',
         );
     }
 
@@ -42,7 +45,7 @@ class FactureMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.facture',
+            view: 'mails.newUser',
         );
     }
 

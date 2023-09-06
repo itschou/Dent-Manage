@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\FactureMail;
 use App\Models\Client;
+use App\Models\Equipe;
 use App\Models\Hebergement;
 use App\Models\Historique;
 use App\Models\User;
@@ -15,7 +16,7 @@ class ClientController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'statusCheck']);
     }
 
 
@@ -24,16 +25,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderByRaw("
-            CASE
-                WHEN status = 'En période de teste' THEN 1
-                WHEN status = 'Non Payé' THEN 2
-                WHEN status = 'En attente de paiement' THEN 3
-                ELSE 4
-            END
-        ")->get();
-
-        return view('client.index', compact('clients'));
+        return view('client.index');
     }
 
     public function getData()
@@ -49,7 +41,6 @@ class ClientController extends Controller
             ELSE 4
         END
     ")->get();
-
         } else {
 
             $clients = Client::where('equipe_id', '=', auth()->user()->equipe_id)->orderByRaw("
@@ -67,6 +58,7 @@ class ClientController extends Controller
             $client->statusClass  = $this->getStatusClass($client->status);
             $client->date  = $client->updated_at->format('Y-m-d h:i');
             $client->equipe  = Client::find($client->id)->equipe->nom;
+            $client->paiement  = Client::find($client->id)->paiement;
             $client->prixMensuelFix  = Hebergement::first()->prixMensuel;
             $client->prixTrimestrielFix  = Hebergement::first()->prixTrimestriel;
             $client->prixSemestrielFix  = Hebergement::first()->prixSemestriel;
@@ -114,11 +106,9 @@ class ClientController extends Controller
             'status' => $request->status,
             'abonnement' => $request->abonnement,
             'prix' => $request->prix,
+            'paiement' => $request->paiement,
 
         ]);
-
-
-        emotify('success', 'Vous venez de créer un client !');
 
         return to_route('client.index');
     }
@@ -136,7 +126,11 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('client.modifier', compact('client'));
+
+        $equipes = Equipe::all();
+        $currentEquipe = $client->equipe_id;
+
+        return view('client.modifier', compact('client', 'equipes', 'currentEquipe'));
     }
 
     /**
@@ -145,26 +139,17 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
 
-        try {
+        $client->update($request->all());
+        Historique::create([
+            'equipe_id' => auth()->user()->equipe_id,
+            'user_id' => auth()->user()->id,
+            'client_id' => $client->id,
+            'status' => $client->status,
+            'prix' => $client->prix,
+            'paiement' => $request->paiement,
 
-            if ($request->input('edit') === "edit") {
-                $client->update($request->all());
-                notify()->success('Vous avez modifié ' . $client->nom . ' avec succès !', 'Bravo !');
-            } else {
-                $client->update($request->all());
-                Mail::to($client->email)->send(new FactureMail($client));
-                Historique::create([
-                    'equipe_id' => auth()->user()->equipe_id,
-                    'user_id' => auth()->user()->id,
-                    'client_id' => $client->id,
-                    'status' => $client->status,
-                    'prix' => $client->prix,
-                ]);
-                notify()->success('Vous avez envoyé une facture à ' . $client->email . ' avec succès !', 'Bravo !');
-            }
-        } catch (\Exception $e)  {
-            notify()->preset('modif-erreur');
-        }
+        ]);
+
         return to_route('client.index');
     }
 
@@ -173,15 +158,9 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        Historique::where('client_id', $client->id)->delete();
+        $client->delete();
 
-
-        try {
-
-            $client->delete();
-            notify()->success('Vous avez supprimé ' . $client->nom . ' avec succès !', 'Bravo !');
-        } catch (\Exception $e)  {
-            notify()->preset('delete-erreur');
-        }
         return to_route('client.index');
     }
 }

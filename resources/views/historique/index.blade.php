@@ -17,6 +17,7 @@
                 <th class="border p-2 text-center">Collaborateur</th>
                 <th class="border p-2 text-center">Client</th>
                 <th class="border p-2 text-center">Prix</th>
+                <th class="border p-2 text-center">Paiement</th>
                 <th class="border p-2 text-center">Status</th>
             </tr>
         </thead>

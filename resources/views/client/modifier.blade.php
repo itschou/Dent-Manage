@@ -45,8 +45,7 @@
 
             <div>
                 <label for="prix" class="block font-medium">Prix</label>
-                <input type="number" id="prixClientCreate" value="{{ $client->prix }}" class="w-full border rounded p-2" min="400" required>
-                <input type="hidden" id="prixHidden" name="prix">
+                <input type="number" name="prix" value="{{ $client->prix }}" class="w-full border rounded p-2" min="400" required>
             </div>
 
             <div>
@@ -58,9 +57,26 @@
                     <option value="Annuel" {{ $client->abonnement === 'Annuel' ? 'selected' : '' }}>Annuel</option>
                 </select>
             </div>
+
+            <div>
+                <label for="paiement" class="block font-medium">Paiement :</label>
+                <select id="paiement" name="paiement" class="w-full border rounded p-2" required>
+                    <option value="Virement" {{ $client->paiement === 'Virement' ? 'selected' : '' }}>Virement</option>
+                    <option value="Espèces" {{ $client->paiement === 'Espèces' ? 'selected' : '' }}>Espèces</option>
+                </select>
+            </div>
             <button name="edit" value="editandfacture" type="submit" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300">Mettre à jour et envoyer la facture</button>
 
             @if(Auth::check() && Auth::user()->role === 'Admin')
+            <div>
+                <label for="equipe" class="block font-medium">Equipe :</label>
+                <select name="equipe_id" id="equipe" class="w-full border rounded p-2" value="{{ $currentEquipe }}">
+                    @foreach($equipes as $equipe)
+                    <option value="{{$equipe->id}}" @if($equipe->id == $currentEquipe) selected @endif>{{ $equipe->nom }} ({{ count($equipe->utilisateurs)}} collaborateurs)</option>
+                    @endforeach
+                </select>
+            </div>
+
             <button name="edit" value="edit" type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Mettre à jour</button> <br><br>
             @endif
             <br>
@@ -75,6 +91,14 @@
             @method('DELETE')
             <button type="submit" class="w-full bg-red-500 text-white p-2 rounded mb-2 hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300">Supprimer</button>
         </form>
+        <div>
+            <label for="equipe" class="block font-medium">Equipe :</label>
+            <select name="equipe" id="equipe" class="w-full border rounded p-2" value="{{ $currentEquipe }}">
+                @foreach($equipes as $equipe)
+                <option value="{{$equipe->id}}" @if($equipe->id == $currentEquipe) selected @endif>{{ $equipe->nom }} ({{ count($equipe->utilisateurs)}} collaborateurs)</option>
+                @endforeach
+            </select>
+        </div>
         @endif
     </div>
 

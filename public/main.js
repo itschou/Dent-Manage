@@ -35,18 +35,17 @@ function CalculatePourcentage() {
             method: "GET",
             success: function (data) {
                 // Initialisation des variables pour chaque type d'abonnement
-                console.log(data);
+                
+                console.log(data[0].prixMensuelFix)
     
                 // Parcours les données de la base de données
                 for (var i = 0; i < data.length; i++) {
                     var client = data[i];
 
-
-
-    
                     // Vérifie le type d'abonnement de ce client et ajoute la somme correspondante
                     if (client.abonnement === "Mensuel") {
                         somme += client.prixMensuelFix;
+                        console.log(client.prixMensuelFix)
                     }
                     if (client.abonnement === "Trimestriel") {
                         somme += client.prixTrimestrielFix;
@@ -57,7 +56,9 @@ function CalculatePourcentage() {
                     if (client.abonnement === "Annuel") {
                         somme += client.prixAnnuelFix;
                     }
+
                 }
+                console.log(somme);
     
                 // Utilise la somme ici, par exemple :
                 $("#argentPourcentageBrut").text((((50 / 100) * argentTotal) - somme).toLocaleString() + " DH");
