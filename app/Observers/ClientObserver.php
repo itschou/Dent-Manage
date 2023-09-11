@@ -6,6 +6,7 @@ use App\Mail\FactureMail;
 use App\Models\Client;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Barryvdh\DomPDF\PDF as PDF;
 
 class ClientObserver
 {
@@ -13,7 +14,7 @@ class ClientObserver
      * Handle the Client "created" event.
      */
     public function created(Client $client): void
-    {
+    {   
         Mail::to($client->email)->send(new FactureMail($client, 'DentAssist Facture - Nouveau client'));
         emotify('success', 'Vous venez de créer un client !');
     }

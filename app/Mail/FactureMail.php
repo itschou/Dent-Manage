@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Barryvdh\DomPDF\PDF as DomPDF;
 use Illuminate\Queue\SerializesModels;
 
 class FactureMail extends Mailable
@@ -19,6 +20,7 @@ class FactureMail extends Mailable
 
     public $client;
     public $titre;
+
 
     public function __construct($client, $titre)
     {
