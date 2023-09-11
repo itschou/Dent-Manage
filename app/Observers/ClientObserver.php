@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Mail\FactureMail;
 use App\Models\Client;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class ClientObserver
 {
@@ -15,6 +16,14 @@ class ClientObserver
     {
         Mail::to($client->email)->send(new FactureMail($client, 'DentAssist Facture - Nouveau client'));
         emotify('success', 'Vous venez de créer un client !');
+    }
+
+    public function creating(Client $client)
+    {
+        $prefix = 'SKU-'; // Par exemple, un préfixe personnalisé
+        $randomPart = strtoupper(Str::random(8)); // Génère 6 caractères aléatoires
+        $sku = $prefix . $randomPart;
+        $client->sku = $sku;
     }
 
     /**

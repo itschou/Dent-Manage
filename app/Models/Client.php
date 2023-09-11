@@ -19,7 +19,8 @@ class Client extends Model
         'abonnement',
         'equipe',
         'equipe_id',
-        'paiement'
+        'paiement',
+        'sku'
     ];
 
     public function equipe()
